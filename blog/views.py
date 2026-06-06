@@ -1,8 +1,13 @@
+from django.db.models.manager import BaseManager
 from django.shortcuts import render,get_object_or_404
 from blog.models import post
 # Create your views here.
-def blog_view(request):
+def blog_view(request,cat_name=None,author_username=None):
     posts = post.objects.filter(status=True)
+    if cat_name:
+        posts: BaseManager[post] = posts.filter(category__name=cat_name)
+    if author_username:
+        posts: BaseManager[post] = posts.filter(author__username = author_username)
     context = {'posts':posts}
     return render(request,'blog/blog-home.html',context)
 
@@ -14,3 +19,15 @@ def test(request,pid):
     Post = get_object_or_404(post,id=pid)
     context = {'post':Post}
     return render(request,'test.html',context)
+def blog_category(request,cat_name):
+    posts = post.objects.filter(status=True)
+    posts = posts.filter(category__name=cat_name)
+    context = {'posts':posts}
+    return render(request,'blog/blog-home.html',context)
+def blog_search(request):
+    posts = post.objects.filter(status=True)
+    if request.method == 'GET':
+        if s := request.GET.get('s'):
+            posts = posts.filter(content__contains=s)
+    context = {'posts':posts}
+    return render(request,'blog/blog-home.html',context)
