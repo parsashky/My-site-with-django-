@@ -1,6 +1,7 @@
 from django.db.models.manager import BaseManager
 from django.shortcuts import render,get_object_or_404
 from blog.models import post
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 def blog_view(request,cat_name=None,author_username=None):
     posts = post.objects.filter(status=True)
@@ -8,6 +9,14 @@ def blog_view(request,cat_name=None,author_username=None):
         posts: BaseManager[post] = posts.filter(category__name=cat_name)
     if author_username:
         posts: BaseManager[post] = posts.filter(author__username = author_username)
+    posts = Paginator(posts,3)
+    try:
+        page_number = request.GET.get('page')
+        posts = posts.get_page(page_number)
+    except PageNotAnInteger:
+        posts = posts.get_page(1)
+    except EmptyPage:
+       posts = posts.get_page(posts.num_pages)
     context = {'posts':posts}
     return render(request,'blog/blog-home.html',context)
 
