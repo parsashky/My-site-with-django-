@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +9,11 @@
 </head>
 
 <body>
-    <p>{{post.title}}</p>
+        <form action="{% url 'website:test' %}" method="post">
+
+
+
+        </form>
 </body>
 
 </html>
