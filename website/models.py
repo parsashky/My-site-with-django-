@@ -13,3 +13,9 @@ class contact(models.Model):
         ordering = ('created_date',)
     def __str__(self):
         return self.name
+    
+class newsletter(models.Model):
+    email = models.EmailField(max_length=254)
+    def  __str__(self):
+        return self.email
+    
