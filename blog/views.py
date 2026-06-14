@@ -3,12 +3,15 @@ from django.shortcuts import render,get_object_or_404
 from blog.models import post
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
-def blog_view(request,cat_name=None,author_username=None):
+def blog_view(request,cat_name=None,author_username=None,tag_name=None):
     posts = post.objects.filter(status=True)
     if cat_name:
         posts: BaseManager[post] = posts.filter(category__name=cat_name)
     if author_username:
         posts: BaseManager[post] = posts.filter(author__username = author_username)
+    if tag_name:
+        posts: BaseManager[post] = posts.filter(tag__name=tag_name)
+
     posts = Paginator(posts,3)
     try:
         page_number = request.GET.get('page')

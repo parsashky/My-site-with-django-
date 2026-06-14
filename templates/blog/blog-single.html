@@ -30,7 +30,7 @@
                     <div class="col-lg-3  col-md-3 meta-details">
                         <ul class="tags">
                             {% for cat in post.category.all %}
-                            <a href="#"></a>{{cat.name}},</a>
+                            <a href="#">{{cat.name}}</a>
                             {% endfor %}
                         </ul>
                         <div class="user-details row">
@@ -209,10 +209,11 @@
                     {% include 'blog/blog-search.html' %}
                     {% include 'blog/blog-writer.html' %}
                     {% include 'blog/latest-post.html' %}
+                    {% include 'blog/blog-tag-clouds.html' %}
                     {% include 'blog/blog-ads.html' %}
                     {% postcategories %}
                     {% include 'blog/blog-newsletter.html' %}
-                    {% include 'blog/blog-tag-clouds.html' %}
+                    
                 </div>
             </div>
         </div>
