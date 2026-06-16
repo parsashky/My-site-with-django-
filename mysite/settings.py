@@ -41,17 +41,23 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'robots',
+    'django_summernote',
     'taggit',
     'debug_toolbar',
     'django_extensions',
     'website.apps.WebsiteConfig',
     'blog',
 ]
-#sites framwork
+# sites framwork
 SITE_ID = 2
-#robots framework
+# robots framework
 ROBOTS_USE_HOST = True
-
+# summernote configs
+SUMMERNOT_THEME = 'bs4'
+SUMMERNOTE_CONFIG = {
+    # Change editor size
+    'iframe_size': '900px',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

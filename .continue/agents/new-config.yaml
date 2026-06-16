@@ -1,0 +1,32 @@
+name: Local Dev Config
+version: 1.0.0
+schema: v1
+
+models:
+  # مدل اصلی برای چت و ویرایش کد
+  - name: Qwen2.5-Coder 7B (Chat)
+    provider: ollama
+    model: qwen2.5-coder:7b
+    roles:
+      - chat
+      - edit
+      - apply
+
+  # استفاده از مدل 7B برای تکمیل خودکار (طبق خواسته شما)
+  - name: Qwen2.5-Coder 7B (Auto)
+    provider: ollama
+    model: qwen2.5-coder:7b
+    roles:
+      - autocomplete
+
+  # استفاده از مدل 1.5B فقط برای ایندکس کردن فایل‌ها (Embeddings) جهت سرعت بیشتر
+  - name: Qwen2.5-Coder 1.5B (Embed)
+    provider: ollama
+    model: qwen2.5-coder:1.5b
+    roles:
+      - embed
+
+# تنظیمات بهینه برای سرعت بخشیدن به Autocomplete مدل 7B
+tabAutocompleteOptions:
+  debounceDelay: 300
+  maxPromptTokens: 500
