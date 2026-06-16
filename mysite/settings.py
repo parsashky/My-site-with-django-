@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'website.apps.WebsiteConfig',
     'blog',
+    'captcha',
 ]
 # sites framwork
 SITE_ID = 2
