@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'multi_captcha_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,12 +55,11 @@ SITE_ID = 2
 # robots framework
 ROBOTS_USE_HOST = True
 # summernote configs
-SUMMERNOT_THEME = 'bs4'
-SUMMERNOTE_CONFIG = {
-    # Change editor size
-    'iframe_size': '900px',
+SUMMERNOTE_THEME = 'bs4'
+# captcha admin setting
+MULTI_CAPTCHA_ADMIN = {
+    'engine': 'simple-captcha',
 }
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -152,6 +152,6 @@ STATICFILES_DIRS =[
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-internal_ips = [
+INTERNAL_IPS = [
     '127.0.0.1',
 ]
