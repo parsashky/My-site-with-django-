@@ -2,6 +2,8 @@ from django.db.models.manager import BaseManager
 from django.shortcuts import render,get_object_or_404
 from blog.models import post,Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from blog.forms import commentform
+from django.contrib import messages
 # Create your views here.
 def blog_view(request,cat_name=None,author_username=None,tag_name=None):
     posts = post.objects.filter(status=True)
@@ -25,14 +27,19 @@ def blog_view(request,cat_name=None,author_username=None,tag_name=None):
 
 def blog_single(request,pid):
     Post = get_object_or_404(post,id=pid,status=True)
-    comments = Comment.objects.filter(post=Post,approved=True).order_by('-created_date')
     if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        subject = request.POST.get('subject')
-        message = request.POST.get('message')
-        Comment.objects.create(post=Post,name=name,email=email,subject=subject,message=message)
-    context = {'post':Post,'comments':comments}
+        form = commentform(request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.post = Post 
+            new_comment.save()
+            messages.add_message(request,messages.SUCCESS,'your comment submited successfully')
+        else:
+            messages.add_message(request,messages.ERROR,'your comment failed to submit')
+
+    comments = Comment.objects.filter(post=Post,approved=True).order_by('-created_date')
+    form = commentform()
+    context = {'post':Post,'comments':comments,'form':form}
     return render(request,'blog/blog-single.html',context)
 def test(request,pid):
     Post = get_object_or_404(post,id=pid)
