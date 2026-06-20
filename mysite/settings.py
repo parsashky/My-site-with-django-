@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'website.apps.WebsiteConfig',
     'blog',
     'captcha',
+    'accounts',
+
 ]
 # sites framwork
 SITE_ID = 2

@@ -33,9 +33,9 @@ def blog_single(request,pid):
             new_comment = form.save(commit=False)
             new_comment.post = Post 
             new_comment.save()
-            messages.add_message(request,messages.SUCCESS,'your comment submited successfully')
+            messages.success(request,messages.SUCCESS,'your comment submited successfully')
         else:
-            messages.add_message(request,messages.ERROR,'your comment failed to submit')
+            messages.error(request,messages.ERROR,'your comment failed to submit')
 
     comments = Comment.objects.filter(post=Post,approved=True).order_by('-created_date')
     form = commentform()
