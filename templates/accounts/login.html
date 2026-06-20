@@ -105,12 +105,12 @@
   <div class="login-box">
     <h2>ورود به حساب</h2>
 
-    <form method="post">
+    <form class="form-signin" method="post" action="{% url 'accounts:login' %}">
       {% csrf_token %}
 
       <div class="form-group">
         <label for="username">نام کاربری</label>
-        <input type="text" id="username" name="username" placeholder="نام کاربری خود را وارد کنید">
+        <input type="text" id="username"  name="username" placeholder="نام کاربری خود را وارد کنید">
       </div>
 
       <div class="form-group">
