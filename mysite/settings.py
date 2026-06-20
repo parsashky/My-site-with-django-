@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'robots',
     'django_summernote',
     'taggit',
-    'debug_toolbar',
+    #'debug_toolbar',
     'django_extensions',
     'website.apps.WebsiteConfig',
     'blog',
