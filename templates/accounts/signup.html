@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ثبت نام</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Tahoma, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #5b4ef7, #7c3aed);
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      padding: 32px 28px;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+    }
+
+    .login-box h2 {
+      text-align: center;
+      margin-bottom: 24px;
+      color: #222;
+      font-size: 26px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #cfcfcf;
+      border-radius: 10px;
+      outline: none;
+      font-size: 14px;
+      color: #222;
+      background: #fff;
+    }
+
+    .form-group input:focus {
+      border-color: #5b4ef7;
+      box-shadow: 0 0 0 3px rgba(91, 78, 247, 0.15);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 10px;
+      background: #5b4ef7;
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #4838e8;
+    }
+
+    .links {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .links a {
+      color: #5b4ef7;
+      text-decoration: none;
+      margin: 0 6px;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    .errorlist {
+      list-style: none;
+      color: red;
+      margin-bottom: 10px;
+      font-size: 13px;
+    }
+
+    .helptext {
+      display: block;
+      margin-top: 6px;
+      color: #666;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>ثبت نام</h2>
+
+    <form method="post" action="{% url 'accounts:signup' %}">
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+        <ul class="errorlist">
+          {% for error in form.non_field_errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <div class="form-group">
+        <label for="username">نام کاربری</label>
+        <input type="text" id="username" name="username" value="{{ form.username.value|default:'' }}" placeholder="نام کاربری خود را وارد کنید">
+        {{ form.username.errors }}
+      </div>
+
+      <div class="form-group">
+        <label for="password1">رمز عبور</label>
+        <input type="password" id="password1" name="password1" placeholder="رمز عبور خود را وارد کنید">
+        {{ form.password1.errors }}
+        {% if form.password1.help_text %}
+          <small class="helptext">{{ form.password1.help_text|safe }}</small>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="password2">تکرار رمز عبور</label>
+        <input type="password" id="password2" name="password2" placeholder="رمز عبور را دوباره وارد کنید">
+        {{ form.password2.errors }}
+      </div>
+
+      <button type="submit" class="btn">ثبت نام</button>
+    </form>
+
+    <div class="links">
+      <a href="{% url 'accounts:login' %}">ورود به حساب کاربری</a>
+    </div>
+  </div>
+
+</body>
+</html>

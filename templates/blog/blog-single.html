@@ -155,7 +155,11 @@
                         <h4>Leave a Comment</h4>
                         <form method="post" action="{% url 'blog:single' pid=post.id %}">
                             {% csrf_token %}
-
+                            <input type="hidden" name="post" value={{post.id}}>
+                            {% if request.user.is_authenticated %}
+                            <input type="hidden" name="name" value={{request.user.username}}>
+                            <input type="hidden" name="email" value={{request.user.email}}>
+                            {% else %}
                             <!-- حتماً name اضافه شد -->
                             <div class="form-group form-inline">
                                 <div class="form-group col-lg-6 col-md-12 name">
@@ -167,10 +171,12 @@
                                         placeholder="Enter email address" ...>
                                 </div>
                             </div>
+                            {% endif %}
                             <div class="form-group">
                                 <input type="text" class="form-control" name="subject" id="subject"
                                     placeholder="Subject" ...>
                             </div>
+                            
                             <div class="form-group">
                                 <!-- حتماً name اضافه شد -->
                                 <textarea class="form-control mb-10" rows="5" name="message" placeholder="Messege" ...
