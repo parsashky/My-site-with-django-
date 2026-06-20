@@ -8,7 +8,7 @@ SECRET_KEY = 'django-insecure-2=$e=qrfz%7e&9wd^(9rl2rkiq5+^xel)xx5!k6yj)&l3+7kah
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['my-site-with-django-1.onrender.com', 'localhost', '127.0.0.1']
 
 INSTALL_APPS = []
 
